@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTTPS Request Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #request-container {
+      margin: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+  <script>
+    function showRequest() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/request', true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var requestContainer = document.getElementById('request-container');
+          requestContainer.innerHTML = '<pre>' + xhr.responseText + '</pre>';
+        }
+      };
+      xhr.send();
+    }
+  </script>
+</head>
+<body onload="showRequest()">
+  <h1>HTTPS Request Viewer</h1>
+  <div id="request-container">
+    <p>Loading request...</p>
+  </div>
+</body>
+</html>
